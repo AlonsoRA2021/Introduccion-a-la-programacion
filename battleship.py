@@ -37,48 +37,54 @@ while True:
         def hacerDisparo(barco):
             contadorJugador = 0
             contadorCPU = 0
-            puntajeJugador = 0
-            puntajeCPU = 0
             for i in range(10):
                 posicionjugador = int(input("JUGADOR intento "+str(i+1)+ ": Ingresa la posicion (de 1 a 20) a donde quieres disparar: "))
                 if (barco[posicionjugador] != 0):
                     contadorJugador += 1
-                    puntajeJugador+=contadorJugador
                     print ("DERRIBADO! BARCO: ", barco[posicionjugador], "Puntaje: ", contadorJugador)
                     barco[posicionjugador] = 0
+                    if (contadorJugador >= 5):
+                        print ("GANASTE! Has derribados todos los 5 barcos :D\nFin del juego...\n------------")
+                        return
                 else:
                     print ("TE EQUIVOCASTE! ", "Puntaje: ", contadorJugador-1)
-            if (contadorJugador >=5):
-                print ("HAS DERRIBADO TODOS LOS BARCOS!")
 
+            print ("----------------------------\nTurno de COMPUTADOR=>")
             for i in range(10):
+                print ("COMPUTADOR intento "+str(i+1))
                 posicionCPU = random.randint(0,19)
                 if (barco[posicionCPU] != 0):
-                    print ("DERRIBADO! BARCO: ", barco[posicionCPU], "Puntaje", contadorCPU)
                     contadorCPU += 1
-                    puntajeCPU+=contadorCPU
+                    print ("DERRIBADO! BARCO: ", barco[posicionCPU], "Puntaje", contadorCPU)
                     barco[posicionCPU] = 0
+                    if (contadorCPU >= 5):
+                        print ("GANASTE! Has derribados todos sus 5 barcos :D\nFin del juego...\n------------")
+                        return
                 else:
                     print ("TE EQUIVOCASTE! ", "Puntaje: ", contadorCPU-1)
-            return contadorJugador, contadorCPU, puntajeJugador, puntajeCPU
-        hacerDisparo(barco)
 
-        def imprimirGanador():
-            print ("Barcos derribados de JUGADOR: ", hacerDisparo(barco))
-            print ("Puntaje total JUGADOR", puntajeJugador)
+            print ("**************************************\nRESULTADOS DEL JUEGO:")
+            print ("Barcos derribados de JUGADOR: ", contadorCPU)
+            print ("Puntaje total JUGADOR", contadorJugador)
             print ("-------------------------------------")
-            print ("Barcos derribados de COMPUTADOR: ", contadorCPU)
-            print ("Puntaje total COMPUTADOR", puntajeCPU)
+            print ("Barcos derribados de COMPUTADOR: ", contadorJugador)
+            print ("Puntaje total COMPUTADOR", contadorCPU)
             print ("-------------------------------------")
             if (contadorJugador > contadorCPU):
                 print ("Felicidades JUGADOR has ganado!")
+                print ("**************************************")
             elif (contadorJugador < contadorCPU):
                 print ("COMPUTADOR ha ganado el juego")
+                print ("**************************************")
             else:
                 print ("JUEGO EMPATADO!")
-        imprimirGanador()
+                print ("**************************************")
+
+        hacerDisparo(barco)
+
     elif opc == '4':
         print("bais")
+        break
 
 
             
